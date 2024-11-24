@@ -1,0 +1,45 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        // Build 디렉터리 생성
+        {
+            "label": "create build folder",
+            "type": "shell",
+            "command": "mkdir",
+            "args": ["-p", "${workspaceFolder}/build"],
+            "problemMatcher": [],
+            "group": { "kind": "build", "isDefault": false }
+        },
+        // C++ 컴파일
+        {
+            "label": "C/C++: g++ build active file",
+            "dependsOn": "create build folder",
+            "command": "g++",
+            "args": [
+                "-g",
+                "${file}",
+                "-o",
+                "${workspaceFolder}/build/${fileBasenameNoExtension}"
+            ],
+            "group": { "kind": "build", "isDefault": true },
+            "problemMatcher": {
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            }
+        },
+        // 바이너리 실행
+        {
+            "label": "execute",
+            "command": "${workspaceFolder}/build/${fileBasenameNoExtension}",
+            "group": "test",
+            "presentation": { "reveal": "always" }
+        }
+    ]
+}
