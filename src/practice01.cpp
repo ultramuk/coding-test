@@ -1,3 +1,5 @@
+/* 연습 문제 1: 동적 크기 배열 구현하기 */
+
 #include <iostream>
 #include <sstream>
 #include <algorithm>
